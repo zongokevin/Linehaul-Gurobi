@@ -10,15 +10,21 @@ for i in range(6):
 		DE[i,j]=model.addVar(vtype=GRB.BINARY,obj=(D[j]*CM+H[j]*R[i]),name="DE[%d,%d]"%(i,j))
 
 model.update()
+#constrainte for the availibility of drivers
 
-#constrainte for driver availibility
 for i in range(6):
 	model.addConstr(DE[i,0]+DE[i,1]+DE[i,2]+DE[i,3]<=A[i],"Driver%s,availibility"%i)
-#constrainte to satisfy each order
+#constrainte to satisfy all orders
+
 for j in range(4):
 	model.addConstr(DE[0,j]+DE[1,j]+DE[2,j]+DE[3,j]+DE[4,j]+DE[5,j]==1,"Pro%s, must be done"%j)
 
 model.update()
+#print out of decision
+
+
+model.ModelSense = 1
+model.optimize()
 def printSolution():
 	if model.status == GRB.status.OPTIMAL:
 		print("\nTotal cost: %d\n\n"%model.objVal)
@@ -29,8 +35,11 @@ def printSolution():
 		print("\n")
 	else:
 		print("No solution")
+		
 
-model.ModelSense = 1
-model.optimize()
 printSolution()
+
+
+
+
 
