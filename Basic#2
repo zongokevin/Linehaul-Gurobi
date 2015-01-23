@@ -25,6 +25,13 @@ ID,Rate= multidict({
 	'F':25.18})
 	
 Order=[('brampton','tropicana'),('montreal','brampton'),('moncton','montreal'),('tropicana','montreal')]
+
+
+for i in range(1,len(Order)):
+	for k in Order:
+		Pro,D=multidict({i,orderDistance(k,distanceTable)})
+	i++
+
 	
 Pro,D=multidict({
 	1:,
@@ -38,8 +45,8 @@ Avail={}
 
 
 
-def orderDistance(From,To,distanceTable):
-	distance=float(distanceTable[From,To])
+def orderDistance((From,To),distanceTable):
+	distance=float(distanceTable[(From,To)])
 	return distance
 	
 def GPSDistance(Driver,To,GPSTable):
