@@ -1,0 +1,48 @@
+distanceTable= {
+  ('brampton','tropicana'):788,
+  ('brampton','montreal'):569,
+  ('brampton','moncton'):1565,
+  ('brampton','brampton'):0,
+  ('tropicana','brampton'):788,
+  ('tropicana','montreal'):614,
+  ('tropicana','moncton'):1208,
+  ('tropicana','tropicana'):0,
+  ('montreal','brampton'):569,
+  ('montreal','tropicana'):614,
+  ('montreal','moncton'):991,
+  ('montreal','montreal'):0,
+  ('moncton','brampton'):1565,
+  ('moncton','tropicana'):1208,
+  ('moncton','montreal'):991,
+  ('moncton','moncton'):0,}
+Terminal	
+ID,Rate= multidict({
+	'A':22.5,
+	'B':22.5,
+	'C':26,
+	'D':24,
+	'E':27,
+	'F':25.18})
+	
+Order=[('brampton','tropicana'),('montreal','brampton'),('moncton','montreal'),('tropicana','montreal')]
+	
+Pro,D=multidict({
+	1:,
+	'B':22.5,
+	'C':26,
+	'D':24,
+	
+D={}
+for i in 
+Avail={}
+
+
+
+def orderDistance(From,To,distanceTable):
+	distance=float(distanceTable[From,To])
+	return distance
+	
+def GPSDistance(Driver,To,GPSTable):
+	distance=float(GPSTable[Driver,To])
+	return distance
+	
