@@ -32,6 +32,7 @@ def createPro(Pro,D):
 	for j in range(i+1,len(Order)+1):
 		Pro[len(Pro):] = [j]
 		D[j]=orderDistance(Order[j-1],distanceTable)
+	return Pro, D
 
 
 #Terminal	
