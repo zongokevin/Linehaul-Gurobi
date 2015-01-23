@@ -15,6 +15,11 @@ distanceTable= {
   ('moncton','tropicana'):1208,
   ('moncton','montreal'):991,
   ('moncton','moncton'):0,}
+  
+  
+Order=[('brampton','tropicana'),('montreal','brampton'),('moncton','montreal'),('tropicana','montreal')]
+
+
 Terminal	
 ID, Rate= multidict({
 	'A':22.5,
@@ -24,7 +29,7 @@ ID, Rate= multidict({
 	'E':27,
 	'F':25.18})
 	
-Order=[('brampton','tropicana'),('montreal','brampton'),('moncton','montreal'),('tropicana','montreal')]
+
 
 
 while 
@@ -61,5 +66,12 @@ def GPSDistance(Driver,To,GPSTable):
 	
 def createPro():
 	for i in range(1,len(Order)+1):
-		Pro, D=multidict({i:orderDistance(Order[i-1],distanceTable)})
+		Pro, D = multidict({i:orderDistance(Order[i-1],distanceTable)})
 		print("%s,%s"%(i,Order[i-1]))
+
+
+
+foods, cost = multidict({
+  'hamburger': 2.49,
+  'chicken':   2.89,
+  
