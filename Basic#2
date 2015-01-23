@@ -16,12 +16,23 @@ distanceTable= {
   ('moncton','montreal'):991,
   ('moncton','moncton'):0,}
   
+Pro=[]
+D={}
   
 Order=[('brampton','tropicana'),('montreal','brampton'),('moncton','montreal'),('tropicana','montreal')]
 
 def orderDistance((From,To),distanceTable):
 	distance=float(distanceTable[(From,To)])
 	return distance
+	
+
+def createPro(Pro,D):
+	i=1
+	Pro, D = multidict({i:orderDistance(Order[i-1],distanceTable)})
+	for j in range(i+1,len(Order)+1):
+		Pro[len(Pro):] = [j]
+		D[j]=orderDistance(Order[j-1],distanceTable)
+
 
 #Terminal	
 ID, Rate= multidict({
@@ -38,11 +49,6 @@ def GPSDistance(Driver,To,GPSTable):
 	distance=float(GPSTable[Driver,To])
 	return distance
 	
-def createPro(Pro,D):
-	i=1
-	Pro, D = multidict({i:orderDistance(Order[i-1],distanceTable)})
-	for j in range(i+1,len(Order)+1):
-		Pro[len(Pro):] = [j]
-		D[j]=orderDistance(Order[j-1],distanceTable)
+
 		
 		
