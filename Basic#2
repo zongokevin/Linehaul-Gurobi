@@ -27,8 +27,14 @@ ID,Rate= multidict({
 Order=[('brampton','tropicana'),('montreal','brampton'),('moncton','montreal'),('tropicana','montreal')]
 
 
-for i in range(1,len(Order)):
-	for k in Order:
+while 
+
+
+for i in range(1,len(Order)+1):
+	print("%s,%s"%(i,Order[i-1])
+	
+
+	
 		Pro,D=multidict({i,orderDistance(k,distanceTable)})
 	i++
 
@@ -53,3 +59,7 @@ def GPSDistance(Driver,To,GPSTable):
 	distance=float(GPSTable[Driver,To])
 	return distance
 	
+def createPro():
+	for i in range(1,len(Order)+1):
+		Pro,D=multidict({i,orderDistance(Order[i-1],distanceTable)})
+		print("%s,%s"%(i,Order[i-1]))
