@@ -19,6 +19,18 @@ for j in range(4):
 	model.addConstr(DE[0,j]+DE[1,j]+DE[2,j]+DE[3,j]+DE[4,j]+DE[5,j]==1,"Pro%s, must be done"%j)
 
 model.update()
+def printSolution():
+	if model.status == GRB.status.OPTIMAL:
+		print("\nTotal cost: %d\n\n"%model.objVal)
+        	for i in range(6):
+			for j in range(4):
+				if DE[i,j].x==1:
+					print("\nDE[%s,%s]= %s"%(i,j,DE[i,j].x))
+		print("\n")
+	else:
+		print("No solution")
 
 model.ModelSense = 1
 model.optimize()
+printSolution()
+
