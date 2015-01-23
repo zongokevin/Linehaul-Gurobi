@@ -65,8 +65,10 @@ def GPSDistance(Driver,To,GPSTable):
 	return distance
 	
 def createPro():
+	i=1
+	Pro, D = multidict({i:orderDistance(Order[i-1],distanceTable)})
 	for i in range(1,len(Order)+1):
-		Pro, D = multidict({i:orderDistance(Order[i-1],distanceTable)})
+	
 		print("%s,%s"%(i,Order[i-1]))
 
 
