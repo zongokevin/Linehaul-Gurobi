@@ -16,7 +16,7 @@ distanceTable= {
   ('moncton','montreal'):991,
   ('moncton','moncton'):0,}
 Terminal	
-ID,Rate= multidict({
+ID, Rate= multidict({
 	'A':22.5,
 	'B':22.5,
 	'C':26,
@@ -61,5 +61,5 @@ def GPSDistance(Driver,To,GPSTable):
 	
 def createPro():
 	for i in range(1,len(Order)+1):
-		Pro,D=multidict({i:orderDistance(Order[i-1],distanceTable)})
+		Pro, D=multidict({i:orderDistance(Order[i-1],distanceTable)})
 		print("%s,%s"%(i,Order[i-1]))
