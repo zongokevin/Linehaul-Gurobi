@@ -38,7 +38,7 @@ model.ModelSense = 1
 model.optimize()
 def printSolution():
 	if model.status == GRB.status.OPTIMAL:
-		print("\nTotal cost: %d $\n\n"%model.objVal)
+		print("\nTotal cost: %d $\n\n"%float(model.objVal))
         	for i in range(6):
 			for j in range(4):
 				if DE[i,j].x==1:
