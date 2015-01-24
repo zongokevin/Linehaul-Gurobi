@@ -1,1 +1,73 @@
-w
+distanceTable= {
+  ('brampton','tropicana'):788,
+  ('brampton','montreal'):569,
+  ('brampton','moncton'):1565,
+  ('brampton','brampton'):0,
+  ('tropicana','brampton'):788,
+  ('tropicana','montreal'):614,
+  ('tropicana','moncton'):1208,
+  ('tropicana','tropicana'):0,
+  ('montreal','brampton'):569,
+  ('montreal','tropicana'):614,
+  ('montreal','moncton'):991,
+  ('montreal','montreal'):0,
+  ('moncton','brampton'):1565,
+  ('moncton','tropicana'):1208,
+  ('moncton','montreal'):991,
+  ('moncton','moncton'):0,}
+  
+  hoursDTable={
+  ('brampton','tropicana'):7.45,
+  ('brampton','montreal'):5.45,
+  ('brampton','moncton'):15.05,
+  ('brampton','brampton'):0,
+  ('tropicana','brampton'):7.45,
+  ('tropicana','montreal'):5.95,
+  ('tropicana','moncton'):11.70,
+  ('tropicana','tropicana'):0,
+  ('montreal','brampton'):5.45,
+  ('montreal','tropicana'):5.95,
+  ('montreal','moncton'):9.87,
+  ('montreal','montreal'):0,
+  ('moncton','brampton'):15.05,
+  ('moncton','tropicana'):1208,
+  ('moncton','montreal'):991,
+  ('moncton','moncton'):0,}
+
+Orders=[('brampton','tropicana'),('montreal','brampton'),('moncton','montreal'),('tropicana','montreal')]
+
+def orderDistance((From,To),distanceTable):
+	distance=float(distanceTable[(From,To)])
+	return distance
+
+
+def createPro():
+	i=1
+	CP = {i:orderDistance(Orders[i-1],distanceTable)}
+	for j in range(i+1,len(Order)+1):
+		CP[j]=orderDistance(Orders[j-1],distanceTable)
+	return CP
+
+Pro, D = multidict(createPro())
+
+
+
+#Terminal	
+ID, Rate= multidict({
+	'A':22.5,
+	'B':22.5,
+	'C':26,
+	'D':24,
+	'E':27,
+	'F':25.18})
+	
+Avail={}
+
+def GPSDistance(Driver,To,GPSTable):
+	distance=float(GPSTable[Driver,To])
+	return distance
+	
+
+		
+		
+
