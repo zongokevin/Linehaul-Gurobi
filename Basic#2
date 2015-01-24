@@ -22,23 +22,14 @@ Order=[('brampton','tropicana'),('montreal','brampton'),('moncton','montreal'),(
 def orderDistance((From,To),distanceTable):
 	distance=float(distanceTable[(From,To)])
 	return distance
-	
-
-def createPro():
-	i=1
-	Pro, D = multidict({i:orderDistance(Order[i-1],distanceTable)})
-	for j in range(i+1,len(Order)+1):
-		Pro[len(Pro):] = [j]
-		D[j]=orderDistance(Order[j-1],distanceTable)
-	return Pro,D
 
 
 def createPro():
 	i=1
-	D = {i:orderDistance(Order[i-1],distanceTable)}
+	CP = {i:orderDistance(Order[i-1],distanceTable)}
 	for j in range(i+1,len(Order)+1):
-		D[j]=orderDistance(Order[j-1],distanceTable)
-	return D
+		CP[j]=orderDistance(Order[j-1],distanceTable)
+	return CP
 
 Pro, D = multidict(createPro())
 
