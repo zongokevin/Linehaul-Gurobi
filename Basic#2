@@ -16,9 +16,7 @@ distanceTable= {
   ('moncton','montreal'):991,
   ('moncton','moncton'):0,}
   
-Pro=[]
-D={}
-  
+
 Order=[('brampton','tropicana'),('montreal','brampton'),('moncton','montreal'),('tropicana','montreal')]
 
 def orderDistance((From,To),distanceTable):
@@ -42,10 +40,8 @@ def createPro():
 		D[j]=orderDistance(Order[j-1],distanceTable)
 	return D
 
-Pro, D = multidict({createPro})
+Pro, D = multidict(createPro())
 
-
-createPro()
 
 
 #Terminal	
