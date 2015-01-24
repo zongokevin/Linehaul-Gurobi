@@ -34,6 +34,17 @@ def createPro():
 		D[j]=orderDistance(Order[j-1],distanceTable)
 	return Pro,D
 
+
+def createPro():
+	i=1
+	D = {i:orderDistance(Order[i-1],distanceTable)}
+	for j in range(i+1,len(Order)+1):
+		D[j]=orderDistance(Order[j-1],distanceTable)
+	return D
+
+Pro, D = multidict({createPro})
+
+
 createPro()
 
 
