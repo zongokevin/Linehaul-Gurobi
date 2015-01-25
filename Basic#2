@@ -30,8 +30,8 @@ distanceTable= {
   ('montreal','moncton'):9.87,
   ('montreal','montreal'):0,
   ('moncton','brampton'):15.05,
-  ('moncton','tropicana'):1208,
-  ('moncton','montreal'):991,
+  ('moncton','tropicana'):11.70,
+  ('moncton','montreal'):9.87,
   ('moncton','moncton'):0,}
 
 Orders=[('brampton','tropicana'),('montreal','brampton'),('moncton','montreal'),('tropicana','montreal')]
