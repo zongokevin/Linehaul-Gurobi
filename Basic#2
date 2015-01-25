@@ -128,9 +128,13 @@ def createProHours():
 
 #D = createProDistance() 
 #Pro = numeroPro()
-H = createProHours()
+
 
 Pro,D = multidict(createProDistance())
+H = createProHours()
+
+D = D + 
+
 
 print(Pro)
 print(D)
@@ -138,11 +142,12 @@ print(Orders)
 print (H)
 print(orderHour(Orders[('montreal','brampton')],hoursDTable))
 
-Pro, D = multidict(createPro())
 
 
 
 Terminal =['brampton','tropicana','montreal','moncton']
+
+
 
 ID, Rate= multidict({
 	'A':22.5,
