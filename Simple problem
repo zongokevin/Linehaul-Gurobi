@@ -1,6 +1,6 @@
 model=Model(“Dispatch”)
 DE={}
-#DE mean Despatch driver x to load y
+#DE[x,y] mean Despatch driver x to load y
 
 D={0:788,1:569,2:991,3:614}
 #Distance for each order
@@ -21,14 +21,15 @@ for i in range(6):
 		DE[i,j]=model.addVar(vtype=GRB.BINARY,obj=(D[j]*CM+H[j]*R[i]),name="DE[%d,%d]"%(i,j))
 
 model.update()
-#constrainte for the availibility of drivers
+
 
 for i in range(6):
 	model.addConstr(DE[i,0]+DE[i,1]+DE[i,2]+DE[i,3]<=A[i],"Driver%s,availibility"%i)
-#constrainte to satisfy all orders
+#constrainte for the availibility of drivers
 
 for j in range(4):
 	model.addConstr(DE[0,j]+DE[1,j]+DE[2,j]+DE[3,j]+DE[4,j]+DE[5,j]==1,"Pro%s, must be done"%j)
+#constrainte to satisfy all orders
 
 model.update()
 #print out of decision
