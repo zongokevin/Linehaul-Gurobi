@@ -15,7 +15,7 @@ distanceTable= {
   ('moncton','brampton'):1565,
   ('moncton','tropicana'):1208,
   ('moncton','montreal'):991,
-  ('moncton','moncton'):0,}
+  ('moncton','moncton'):0}
   
 hoursDTable={
   ('brampton','tropicana'):7.45,
@@ -33,13 +33,59 @@ hoursDTable={
   ('moncton','brampton'):15.05,
   ('moncton','tropicana'):11.70,
   ('moncton','montreal'):9.87,
-  ('moncton','moncton'):0,}
+  ('moncton','moncton'):0}
   
-GPSTable = {
-	('tropicana','brampton'):7.45,
-  ('tropicana','montreal'):5.95,
-  ('tropicana','moncton'):11.70,
-  ('tropicana','tropicana'):0,
+GPSdinstanceTable = {
+	('A','brampton'):0,
+  ('A','montreal'):569,
+  ('A','moncton'):1565,
+  ('A','tropicana'):788,
+  ('B','brampton'):569,
+  ('B','montreal'):0,
+  ('B','moncton'):991,
+  ('B','tropicana'):614,
+  ('C','brampton'):619,
+  ('C','montreal'):50,
+  ('C','moncton'):941,
+  ('C','tropicana'):664,
+  ('D','brampton'):1565,
+  ('D','montreal'):991,
+  ('D','moncton'):0,
+  ('D','tropicana'):1208,
+  ('E','brampton'):996,
+  ('E','montreal'):822,
+  ('E','moncton'):1000,
+  ('E','tropicana'):208,
+  ('F','brampton'):580,
+  ('F','montreal'):822,
+  ('F','moncton'):1416,
+  ('F','tropicana'):208}
+
+GPShoursTable = {
+	('A','brampton'):0,
+  ('A','montreal'):5.45,
+  ('A','moncton'):15.05,
+  ('A','tropicana'):7.45,
+  ('B','brampton'):5.45,
+  ('B','montreal'):0,
+  ('B','moncton'):9.87,
+  ('B','tropicana'):5.95,
+  ('C','brampton'):5.99,
+  ('C','montreal'):0.48,
+  ('C','moncton'):9.11,
+  ('C','tropicana'):6.43,
+  ('D','brampton'):15.05,
+  ('D','montreal'):9.87,
+  ('D','moncton'):0,
+  ('D','tropicana'):11.70,
+  ('E','brampton'):9.64,
+  ('E','montreal'):7.96,
+  ('E','moncton'):9.68,
+  ('E','tropicana'):2.01,
+  ('F','brampton'):5.61,
+  ('F','montreal'):7.96,
+  ('F','moncton'):13.71,
+  ('F','tropicana'):2.01}
 
 Orders=[('brampton','tropicana'),('montreal','brampton'),('moncton','montreal'),('tropicana','montreal')]
 
@@ -50,6 +96,14 @@ def orderDistance(FromTo,distanceTable):
 def orderHour(FromTo,hoursDTable):
     hours=float(hoursDTable[FromTo])
     return hours
+
+def driverDistancePosition((Driver,To),GPSdinstanceTable):
+	distance=float(GPSdinstanceTable[(Driver,To)])
+	return distance
+
+def driverHoursPosition((Driver,To),GPShoursTable):
+	distance=float(GPShoursTable[(Driver,To)])
+	return distance
 
 def createProDistance():
 	i=1
@@ -100,9 +154,7 @@ ID, Rate= multidict({
 	
 Avail = {'A':1,'B':0,'C':1,'D':1,'E':1,'F':1})
 
-def GPSDistance((Driver,To),GPSTable):
-	distance=float(GPSTable[(Driver,To)])
-	return distance
+
 	
 
 		
