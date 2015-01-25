@@ -34,6 +34,12 @@ hoursDTable={
   ('moncton','tropicana'):11.70,
   ('moncton','montreal'):9.87,
   ('moncton','moncton'):0,}
+  
+GPSTable = {
+	('tropicana','brampton'):7.45,
+  ('tropicana','montreal'):5.95,
+  ('tropicana','moncton'):11.70,
+  ('tropicana','tropicana'):0,
 
 Orders=[('brampton','tropicana'),('montreal','brampton'),('moncton','montreal'),('tropicana','montreal')]
 
@@ -82,7 +88,8 @@ Pro, D = multidict(createPro())
 
 
 
-#Terminal	
+Terminal =['brampton','tropicana','montreal','moncton']
+
 ID, Rate= multidict({
 	'A':22.5,
 	'B':22.5,
@@ -91,10 +98,10 @@ ID, Rate= multidict({
 	'E':27,
 	'F':25.18})
 	
-Avail={}
+Avail = {'A':1,'B':0,'C':1,'D':1,'E':1,'F':1})
 
-def GPSDistance(Driver,To,GPSTable):
-	distance=float(GPSTable[Driver,To])
+def GPSDistance((Driver,To),GPSTable):
+	distance=float(GPSTable[(Driver,To)])
 	return distance
 	
 
