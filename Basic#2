@@ -132,8 +132,14 @@ def createProHours():
 
 Pro,D = multidict(createProDistance())
 H = createProHours()
+Ddrive = 
+Hdrive=
 
-D = D + 
+def createDdrive()
+	for i in ID:
+		for j in Terminal:
+			Drive[i,j]= driverDistancePosition((i,j),GPSdinstanceTable)
+	return Drive
 
 
 print(Pro)
