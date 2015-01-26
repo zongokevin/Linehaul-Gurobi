@@ -119,6 +119,22 @@ def createProHours():
         OH[j]=orderHour(Orders[j-1],hoursDTable)
     return OH
 
+def createDdrive():
+	distance={}
+	for i in ID:
+		for (From,To) in Orders:
+			distance[i,From]= driverDistancePosition((i,From),GPSdinstanceTable)
+	return distance
+
+def createHdrive():
+	hours={}
+	for i in ID:
+		for (From,To) in Orders:
+			hours[i,From]= driverHoursPosition((i,From),GPShoursTable)
+	return hours
+
+
+
 ###Juste pour Visual Studio
 #def numeroPro():
  #   Num=[]
@@ -133,21 +149,9 @@ def createProHours():
 Pro,D = multidict(createProDistance())
 H = createProHours()
 Ddrive = createDdrive()
-Hdrive=
+Hdrive = createHdrive()
 
-def createDdrive():
-	distance={}
-	for i in ID:
-		for (From,To) in Orders:
-			distance[i,From]= driverDistancePosition((i,From),GPSdinstanceTable)
-	return distance
 
-def createDdrive():
-	hours={}
-	for i in ID:
-		for (From,To) in Orders:
-			hours[i,From]= driverHoursPosition((i,From),GPShoursTable)
-	return hours
 
 print(Pro)
 print(D)
@@ -159,8 +163,6 @@ print(orderHour(Orders[('montreal','brampton')],hoursDTable))
 
 
 Terminal =['brampton','tropicana','montreal','moncton']
-
-
 
 ID, Rate= multidict({
 	'A':22.5,
