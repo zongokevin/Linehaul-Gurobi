@@ -138,8 +138,8 @@ Hdrive=
 def createDdrive():
 	distance={}
 	for i in ID:
-		for j in Terminal:
-			distance[i,j]= driverDistancePosition((i,j),GPSdinstanceTable)
+		for (From,to) in Orders:
+			distance[i,From]= driverDistancePosition((i,From),GPSdinstanceTable)
 	return distance
 
 
