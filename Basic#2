@@ -141,16 +141,19 @@ def findFrom((From,To)):
 	return From
 
 def ProFrom():
-	ProFromTable ={}
+	result ={}
 	for k in Pro:
-		ProFromTable[k]=findFrom(Orders[k-1])
-	return ProFromTable
+		result[k]=findFrom(Orders[k-1])
+	return result
+
+ProFromTable = ProFrom()
 
 def createDdrive():
 	distance={}
 	for i in ID:
-		for (From,To) in Orders:
-			distance[i,From]= driverDistancePosition((i,From),GPSdinstanceTable)
+		for k in Pro:
+		#for (From,To) in Orders:
+			distance[i,k]= driverDistancePosition((i,ProFromTable[k]),GPSdinstanceTable)
 	return distance
 
 def createHdrive():
