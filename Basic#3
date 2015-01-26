@@ -22,7 +22,6 @@ Orders=[('brampton','tropicana'),('montreal','brampton'),('moncton','montreal'),
 USF = {'A':1,'B':0,'C':1,'D':1,'E':1,'F':0}
 
 def USdepartureOrDestination ((From,To)):
-	for 
 	if TerminalCountry[From]=='US' or TerminalCountry[To]=='US':
 		result = 1
 	else:
