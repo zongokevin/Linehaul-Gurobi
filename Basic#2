@@ -234,14 +234,3 @@ print(D)
 print(Orders)
 print (H)
 print(orderHour(Orders[('montreal','brampton')],hoursDTable))
-
-
-
-
-
-
-	
-
-		
-		
-
