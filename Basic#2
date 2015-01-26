@@ -137,6 +137,10 @@ def createProHours():
         OH[j]=orderHour(Orders[j-1],hoursDTable)
     return OH
 
+Pro,D = multidict(createProDistance())
+
+H = createProHours()
+
 def findFrom((From,To)):
 	return From
 
@@ -147,6 +151,7 @@ def ProFrom():
 	return result
 
 ProFromTable = ProFrom()
+
 
 def createDdrive():
 	distance={}
@@ -163,9 +168,6 @@ def createHdrive():
 	return hours
 
 
-Pro,D = multidict(createProDistance())
-
-H = createProHours()
 
 Ddrive = createDdrive()
 
