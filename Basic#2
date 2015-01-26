@@ -1,4 +1,8 @@
 print ('Hello World')
+
+model=Model(“Dispatch#2”)
+DE={}
+
 distanceTable= {
   ('brampton','tropicana'):788,
   ('brampton','montreal'):569,
@@ -135,9 +139,10 @@ def createProHours():
 
 def createDdrive():
 	distance={}
-	for i in ID:
-		for (From,To) in Orders:
-			distance[i,From]= driverDistancePosition((i,From),GPSdinstanceTable)
+	for k in Pro:
+		for i in ID:
+			for (From,To) in Orders:
+				distance[i,k]= driverDistancePosition((i,From),GPSdinstanceTable)
 	return distance
 
 def createHdrive():
@@ -155,6 +160,28 @@ H = createProHours()
 Ddrive = createDdrive()
 
 Hdrive = createHdrive()
+###########################################################################################################
+for i in ID:
+	for j in Pro:
+		DE[i,j]=model.addVar(vtype=GRB.BINARY,obj=((D[j]+Ddrive[i,j])*CM+H[j]*R[i]),name="DE[%d,%d]"%(i,j))
+		#DE[i,j]=model.addVar(vtype=GRB.BINARY,obj=(D[j]*CM+H[j]*R[i]),name="DE[%d,%d]"%(i,j))
+
+model.update()
+
+
+for i in range(6):
+	model.addConstr(DE[i,0]+DE[i,1]+DE[i,2]+DE[i,3]<=A[i],"Driver%s,availibility"%i)
+#constrainte for the availibility of drivers
+
+for j in range(4):
+	model.addConstr(DE[0,j]+DE[1,j]+DE[2,j]+DE[3,j]+DE[4,j]+DE[5,j]==1,"Pro%s, must be done"%j)
+#constrainte to satisfy all orders
+
+
+
+
+
+
 
 
 ###Juste pour Visual Studio
