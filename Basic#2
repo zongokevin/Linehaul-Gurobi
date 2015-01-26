@@ -89,6 +89,8 @@ GPShoursTable = {
 
 Terminal =['brampton','tropicana','montreal','moncton']
 
+CM=1.5
+
 ID, Rate= multidict({
 	'A':22.5,
 	'B':22.5,
