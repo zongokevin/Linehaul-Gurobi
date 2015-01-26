@@ -87,6 +87,18 @@ GPShoursTable = {
   ('F','moncton'):13.71,
   ('F','tropicana'):2.01}
 
+Terminal =['brampton','tropicana','montreal','moncton']
+
+ID, Rate= multidict({
+	'A':22.5,
+	'B':22.5,
+	'C':26,
+	'D':24,
+	'E':27,
+	'F':25.18})
+
+Avail = {'A':1,'B':0,'C':1,'D':1,'E':1,'F':1}
+
 Orders=[('brampton','tropicana'),('montreal','brampton'),('moncton','montreal'),('tropicana','montreal')]
 
 def orderDistance(FromTo,distanceTable):
@@ -134,6 +146,11 @@ def createHdrive():
 	return hours
 
 
+Pro,D = multidict(createProDistance())
+H = createProHours()
+Ddrive = createDdrive()
+Hdrive = createHdrive()
+
 
 ###Juste pour Visual Studio
 #def numeroPro():
@@ -146,11 +163,6 @@ def createHdrive():
 #Pro = numeroPro()
 
 
-Pro,D = multidict(createProDistance())
-H = createProHours()
-Ddrive = createDdrive()
-Hdrive = createHdrive()
-
 
 
 print(Pro)
@@ -162,17 +174,6 @@ print(orderHour(Orders[('montreal','brampton')],hoursDTable))
 
 
 
-Terminal =['brampton','tropicana','montreal','moncton']
-
-ID, Rate= multidict({
-	'A':22.5,
-	'B':22.5,
-	'C':26,
-	'D':24,
-	'E':27,
-	'F':25.18})
-
-Avail = {'A':1,'B':0,'C':1,'D':1,'E':1,'F':1})
 
 
 	
