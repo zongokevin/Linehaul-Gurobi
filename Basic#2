@@ -1,5 +1,3 @@
-print ('Hello World')
-
 model=Model(“Dispatch#2”)
 DE={}
 
@@ -210,19 +208,3 @@ def printSolution():
 
 printSolution()
 ###################################################################################################
-
-###Juste pour Visual Studio
-#def numeroPro():
- #   Num=[]
-  #  for j in range(1,len(Orders)+1):
-   #     Num[len(Num):]= [j]
-    #return Num
-
-#D = createProDistance() 
-#Pro = numeroPro()
-
-print(Pro)
-print(D)
-print(Orders)
-print (H)
-print(orderHour(Orders[('montreal','brampton')],hoursDTable))
