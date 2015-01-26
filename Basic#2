@@ -175,7 +175,7 @@ Hdrive = createHdrive()
 ###########################################################################################################
 for i in ID:
 	for j in Pro:
-		DE[i,j]=model.addVar(vtype=GRB.BINARY,obj=((D[j]+Ddrive[i,j])*CM+(H[j]+H[i,j])*Rate[i]),name="DE[%d,%d]"%(i,j))
+		DE[i,j]=model.addVar(vtype=GRB.BINARY,obj=((D[j]+Ddrive[i,j])*CM+(H[j]+Hdrive[i,j])*Rate[i]),name="DE[%d,%d]"%(i,j))
 		#DE[i,j]=model.addVar(vtype=GRB.BINARY,obj=(D[j]*CM+H[j]*Rate[i]),name="DE[%d,%d]"%(i,j))
 
 model.update()
