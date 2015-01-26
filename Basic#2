@@ -209,12 +209,7 @@ def printSolution():
 		
 
 printSolution()
-
-
-
 ###################################################################################################
-
-
 
 ###Juste pour Visual Studio
 #def numeroPro():
