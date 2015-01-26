@@ -152,15 +152,14 @@ def createDdrive():
 	distance={}
 	for i in ID:
 		for k in Pro:
-		#for (From,To) in Orders:
-			distance[i,k]= driverDistancePosition((i,ProFromTable[k]),GPSdinstanceTable)
+		distance[i,k]= driverDistancePosition((i,ProFromTable[k]),GPSdinstanceTable)
 	return distance
 
 def createHdrive():
 	hours={}
 	for i in ID:
-		for (From,To) in Orders:
-			hours[i,From]= driverHoursPosition((i,From),GPShoursTable)
+		for k in pro:
+			hours[i,k]= driverHoursPosition((i,ProFromTable[k]),GPShoursTable)
 	return hours
 
 
