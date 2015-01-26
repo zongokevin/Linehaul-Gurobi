@@ -21,13 +21,23 @@ Orders=[('brampton','tropicana'),('montreal','brampton'),('moncton','montreal'),
 
 USF = {'A':1,'B':0,'C':1,'D':1,'E':1,'F':0}
 
-def USdepartureOrDestination ((From,To))
+def USdepartureOrDestination ((From,To)):
+	for 
 	if TerminalCountry[From]=='US' or TerminalCountry[To]=='US':
 		result = 1
 	else:
 		result = 0
 	return result
 
+def createProFromToUS():
+	table = {}
+	for k in Pro:
+		table[k]=USdepartureOrDestination(Orders[k-1])
+	return table
+
+# if the pro is from or going to a US terminal
+
+ProFromToUS = createProFromToUS()
 
 for i in ID:
 	model.addConstr(DE[i,1]+DE[i,2]+DE[i,3]+DE[i,4]<=Avail[i],"Driver%s,availibility"%i)
