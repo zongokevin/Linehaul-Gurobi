@@ -179,18 +179,38 @@ for i in ID:
 model.update()
 
 
-for i in range(6):
-	model.addConstr(DE[i,0]+DE[i,1]+DE[i,2]+DE[i,3]<=A[i],"Driver%s,availibility"%i)
+#DriversAvailibility = 
+
+for i in ID:
+	model.addConstr(DE[i,0]+DE[i,1]+DE[i,2]+DE[i,3]<=Avail[i],"Driver%s,availibility"%i)
 #constrainte for the availibility of drivers
 
-for j in range(4):
-	model.addConstr(DE[0,j]+DE[1,j]+DE[2,j]+DE[3,j]+DE[4,j]+DE[5,j]==1,"Pro%s, must be done"%j)
+for j in Pro:
+	model.addConstr(DE['A',j]+DE['B',j]+DE['C',j]+DE['D',j]+DE['E',j]+DE['F',j]==1,"Pro%s, must be done"%j)
 #constrainte to satisfy all orders
 
+model.update()
+#################################################################################################
+
+model.ModelSense = 1
+model.optimize()
+def printSolution():
+	if model.status == GRB.status.OPTIMAL:
+		print("\nTotal cost: %s $\n\n"%float(model.objVal))
+        	for i in ID:
+			for j in Pro:
+				if DE[i,j].x==1:
+					print("\nDE[%s,%s]= %s"%(i,j,DE[i,j].x))
+		print("\n")
+	else:
+		print("No solution")
+		
+
+printSolution()
 
 
 
-
+###################################################################################################
 
 
 
