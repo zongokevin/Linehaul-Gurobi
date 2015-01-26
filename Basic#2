@@ -184,7 +184,7 @@ model.update()
 #DriversAvailibility = 
 
 for i in ID:
-	model.addConstr(DE[i,0]+DE[i,1]+DE[i,2]+DE[i,3]<=Avail[i],"Driver%s,availibility"%i)
+	model.addConstr(DE[i,1]+DE[i,2]+DE[i,3]+DE[i,4]<=Avail[i],"Driver%s,availibility"%i)
 #constrainte for the availibility of drivers
 
 for j in Pro:
