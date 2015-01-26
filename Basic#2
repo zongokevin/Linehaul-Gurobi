@@ -135,11 +135,11 @@ H = createProHours()
 Ddrive = 
 Hdrive=
 
-def createDdrive()
+def createDdrive():
 	for i in ID:
 		for j in Terminal:
-			Drive[i,j]= driverDistancePosition((i,j),GPSdinstanceTable)
-	return Drive
+			Ddrive[i,j]= driverDistancePosition((i,j),GPSdinstanceTable)
+	return Ddrive
 
 
 print(Pro)
