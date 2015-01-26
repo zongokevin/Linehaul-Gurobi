@@ -1,24 +1,15 @@
 
 
-Terminal =['brampton','tropicana','montreal','moncton']
+#Terminal =['brampton','tropicana','montreal','moncton']
 
 TerminalCountry = {'brampton':'CAD','tropicana':'US','montreal':'CAD','moncton':'CAD'}
 
-Orders=[('brampton','tropicana'),('montreal','brampton'),('moncton','montreal'),('tropicana','montreal')]
+#Orders=[('brampton','tropicana'),('montreal','brampton'),('moncton','montreal'),('tropicana','montreal')]
 
-CM=1.5
+#CM=1.5
 
-ID, Rate= multidict({
-	'A':22.5,
-	'B':22.5,
-	'C':26,
-	'D':24,
-	'E':27,
-	'F':25.18})
 
-Avail = {'A':1,'B':0,'C':1,'D':1,'E':1,'F':1}
-
-Orders=[('brampton','tropicana'),('montreal','brampton'),('moncton','montreal'),('tropicana','montreal')]
+#Avail = {'A':1,'B':0,'C':1,'D':1,'E':1,'F':1}
 
 USF = {'A':1,'B':0,'C':1,'D':1,'E':1,'F':0}
 
