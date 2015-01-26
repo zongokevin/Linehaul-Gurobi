@@ -137,12 +137,20 @@ def createProHours():
         OH[j]=orderHour(Orders[j-1],hoursDTable)
     return OH
 
+def findFrom((From,To)):
+	return From
+
+def ProFrom():
+	ProFromTable ={}
+	for k in Pro:
+		ProFromTable[k]=findFrom(Orders[k-1])
+	return ProFromTable
+
 def createDdrive():
 	distance={}
-	for k in Pro:
-		for i in ID:
-			for (From,To) in Orders:
-				distance[i,k]= driverDistancePosition((i,From),GPSdinstanceTable)
+	for i in ID:
+		for (From,To) in Orders:
+			distance[i,From]= driverDistancePosition((i,From),GPSdinstanceTable)
 	return distance
 
 def createHdrive():
