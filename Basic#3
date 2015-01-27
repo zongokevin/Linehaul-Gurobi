@@ -14,10 +14,10 @@ USF = {'A':1,'B':0,'C':1,'D':1,'E':1,'F':0}
 
 def USdepartureOrDestination ((From,To)):
 	if TerminalCountry[From]=='US' or TerminalCountry[To]=='US':
-		result = 1
+		return result = 1
 	else:
-		result = 0
-	return result
+		return result = 0
+
 
 def createProFromToUS():
 	table = {}
@@ -28,9 +28,15 @@ def createProFromToUS():
 # if the pro is from or going to a US terminal
 
 ProFromToUS = createProFromToUS()
+######################################################################################
 
 for i in ID:
   for j in Pro:
     model.addConstr(DE[i,j]+ProFromToUS[j]<=USF[i]+1,"Driver%s,is a US fleet"%i)
 	#model.addConstr(DE[i,1]+DE[i,2]+DE[i,3]+DE[i,4]<=Avail[i],"Driver%s,availibility"%i)
 #constrainte for the availibility of drivers
+########################################################################################
+
+for i in ID:
+	for j in Pro:
+		DE[i,j]=model.addVar(vtype=GRB.BINARY,obj=((D[j]+Ddrive[i,j])*CM+(H[j]+Hdrive[i,j])*Rate[i]),name="DE[%s,%s]"%(i,j))
