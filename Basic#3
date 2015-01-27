@@ -11,7 +11,7 @@ TerminalCountry = {'brampton':'CAD','tropicana':'US','montreal':'CAD','moncton':
 
 #Orders=[('brampton','tropicana'),('montreal','brampton'),('moncton','montreal'),('tropicana','montreal')]
 
-#CM=1.5
+#CM=1.5 
 
 #Avail = {'A':1,'B':0,'C':1,'D':1,'E':1,'F':1}
 
