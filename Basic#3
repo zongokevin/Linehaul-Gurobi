@@ -41,6 +41,10 @@ for i in ID:
 	for j in Pro:
 		CM[i,j]=model.addVar(vtype=GRB.CONTINUOUS,name="Canadian/US cost milles")
 
+for i in ID:
+	for j in Pro:
+		DE[i,j]=model.addVar(vtype=GRB.BINARY,obj=((D[j]+Ddrive[i,j])*float(CM[i,j])+(H[j]+Hdrive[i,j])*Rate[i]),name="DE[%s,%s]"%(i,j))
+
 ######################################################################################
 
 for i in ID:
