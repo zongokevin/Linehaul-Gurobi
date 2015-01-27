@@ -17,11 +17,13 @@ TerminalCountry = {'brampton':'CAD','tropicana':'US','montreal':'CAD','moncton':
 
 USF = {'A':1,'B':0,'C':1,'D':1,'E':1,'F':0}
 
-def USdepartureOrDestination ((From,To)):
+def USdepartureOrDestination((From,To)):
 	if TerminalCountry[From]=='US' or TerminalCountry[To]=='US':
-		return result = 1
+		result = 1
 	else:
-		return result = 0
+		result = 0
+	return result
+
 
 
 def createProFromToUS():
