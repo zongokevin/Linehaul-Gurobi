@@ -8,7 +8,6 @@ TerminalCountry = {'brampton':'CAD','tropicana':'US','montreal':'CAD','moncton':
 
 #CM=1.5
 
-
 #Avail = {'A':1,'B':0,'C':1,'D':1,'E':1,'F':1}
 
 USF = {'A':1,'B':0,'C':1,'D':1,'E':1,'F':0}
