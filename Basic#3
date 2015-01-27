@@ -1,3 +1,5 @@
+import sys
+import math
 
 
 #Terminal =['brampton','tropicana','montreal','moncton']
@@ -36,6 +38,11 @@ for i in ID:
 	#model.addConstr(DE[i,1]+DE[i,2]+DE[i,3]+DE[i,4]<=Avail[i],"Driver%s,availibility"%i)
 #constrainte for the availibility of drivers
 ########################################################################################
+
+CAM= 1.5
+USM= 1.85
+
+CM=model.addVar(vtype=GRB.CONTINUOUS,
 
 for i in ID:
 	for j in Pro:
