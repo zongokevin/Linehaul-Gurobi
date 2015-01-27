@@ -1,6 +1,9 @@
 import sys
 import math
 
+CAM= 1.5
+USM= 1.85
+CM={}
 
 #Terminal =['brampton','tropicana','montreal','moncton']
 
@@ -30,22 +33,25 @@ def createProFromToUS():
 # if the pro is from or going to a US terminal
 
 ProFromToUS = createProFromToUS()
-######################################################################################
-
-for i in ID:
-  for j in Pro:
-    model.addConstr(DE[i,j]+ProFromToUS[j]<=USF[i]+1,"Driver%s,is a US fleet"%i)
-	#model.addConstr(DE[i,1]+DE[i,2]+DE[i,3]+DE[i,4]<=Avail[i],"Driver%s,availibility"%i)
-#constrainte for the availibility of drivers
-########################################################################################
-
-CAM= 1.5
-USM= 1.85
-
-for i in ID:
-  for j in Pro:
-CM=model.addVar(vtype=GRB.CONTINUOUS,name="Canadian/US cost milles")
+###################################################################################
 
 for i in ID:
 	for j in Pro:
-		DE[i,j]=model.addVar(vtype=GRB.BINARY,obj=((D[j]+Ddrive[i,j])*CM+(H[j]+Hdrive[i,j])*Rate[i]),name="DE[%s,%s]"%(i,j))
+		CM[i,j]=model.addVar(vtype=GRB.CONTINUOUS,name="Canadian/US cost milles")
+
+######################################################################################
+
+for i in ID:
+	for j in Pro:
+		model.addConstr(DE[i,j]+ProFromToUS[j]<=USF[i]+1,"Driver%s,is a US fleet"%i)
+	#model.addConstr(DE[i,1]+DE[i,2]+DE[i,3]+DE[i,4]<=Avail[i],"Driver%s,availibility"%i)
+#constrainte for the availibility of drivers
+
+for i in ID:
+	for j in Pro:
+		model.addConstr(CM[i,j]= ProFromToUS[j]*(USM-CAM)+CAM, "mille cost for driver%s to pro%S if US or not"%(i,j))
+
+
+    
+########################################################################################
+
