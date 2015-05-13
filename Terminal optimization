@@ -1,0 +1,122 @@
+#!/usr/bin/python
+from gurobipy import *
+model=Model('Terminal')
+import xlrd
+#Doors =[1,2,3,4,5,6]
+Doors =[1,2,3,4,5,6,7,8,9,10,11,12]
+#Doors = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
+#Side1 =[1,2,3]
+Side1 =[1,2,3,4,5,6]
+#Side2=[4,5,6]
+Side2=[7,8,9,10,11,12]
+distanceTable={}
+
+workbook = xlrd.open_workbook("U:/Stage 2015/Hatim/Hatim.xls")  #Make sure to convert this file to xl 2007
+sheet = workbook.sheet_by_name('Basic10')
+Trailer = {} #for trailer
+Terminal = []
+Origin = {} #to find a trailer with his terminal origin
+
+for col in range(3,15):
+    Terminal.append(sheet.cell_value(1,col)) ## add terminal Origin
+
+for row in range(2,14):
+    Origin[sheet.cell_value(row,1)] = sheet.cell_value(row,0)
+    Trailer[str(sheet.cell_value(row,0))] = (str(sheet.cell_value(row,1)),sheet.cell_value(row,2))
+      #number of trailer                                ##### (0:Origin, 1:weight )
+
+
+for i in Doors: # multiplier par 5 metre pour les distance
+    for j in Doors:
+        if i != j:
+            if i in Side1  and j in Side1 : #distance between each dor of each side
+                distanceTable[i,j] = abs(i - j)*5
+            if i in Side2 and j in Side2:  #distance between each dor of each side
+                distanceTable[i,j] = abs(i - j)*5  
+
+
+            if i in Side1 and j in Side2: #distance between dor of different side
+                distanceTable[i,j] = (abs(i - (j-len(Doors)/2)) + 1)*5 
+
+            if i in Side2 and j in Side1:
+                distanceTable[i,j] = (abs(j - (i-len(Doors)/2)) + 1)*5 #add 1 because off crossing
+        else:
+            distanceTable[i,j] =0.0
+
+
+
+
+#constrainte for sum of number equal to 21
+#Constainte for sum of all DE = 6
+
+
+
+
+Percentage ={}
+for row in range(2,14): #starting at third line
+    for col in range(3,15):
+        if sheet.cell_value(row,1) != sheet.cell_value(1,col): #May be wil need to do every thin
+            if sheet.cell_value(row,col) != '':
+                Percentage[(sheet.cell_value(row,0),sheet.cell_value(1,col))] = sheet.cell_value(row,col)
+            else:
+                Percentage[(sheet.cell_value(row,0),sheet.cell_value(1,col))] = 0.0 #if nothing is sent
+                        # trailer name , terminal code                       # percentage
+
+#Trailer =['A','B','C','D','E','F']
+
+DE={} #decision one trailer to a door
+
+for i in Trailer:
+    for j in Doors:
+        DE[i,j]=model.addVar(vtype=GRB.BINARY,name="DE[%s,%s]"%(i,j))
+
+
+model.update()
+## make it easy like the dispatching/ think about it
+expr_of_OBJ = LinExpr()
+
+for i in Trailer:
+    Terminal_Code = list(Terminal)
+    Terminal_Code.remove(Trailer[i][0]) #trailer cant send to the same location form wher is coming from
+    print i
+    print 'original terminal',Terminal
+    print 'fake terminal',Terminal_Code
+    for j in Terminal_Code: # Find the terminal code eligible for it
+        for x in Doors: #each scenario for eache possible door
+            expr_of_OBJ += (DE[i,x]*( Percentage[i,j]*Trailer[i][1])*(quicksum(distanceTable[x,y]*DE[Origin[j],y] for y in Doors )))
+            #trailer i is at the door x   #volume from trailer i to terminal j  #distance from door x to door of terminal j
+
+model.update()
+
+model.setObjective(expr_of_OBJ, GRB.MINIMIZE)
+
+#only one trailer by door.
+for x in Doors:
+    model.addConstr( quicksum(DE[i,x] for i in Trailer) == 1)
+
+#Same trailer cant be assigned different door
+for i in Trailer:
+    model.addConstr( quicksum(DE[i,x] for x in Doors) == 1)
+
+#Sum of  door number 1+2+3+4+5+6 = ....
+model.addConstr( quicksum(DE[i,x]*x for x in Doors for i in Trailer) == 78)
+
+#model.addConstr(DE['C',11]==1)
+model.setParam('TimeLimit', 15)
+
+model.update()
+model.presolve()
+
+model.optimize()
+
+def printSaveResult():
+    Result_file =open("U:/Desktop/Hatim_Terminal.txt",'w')
+
+    for y in DE:
+        if DE[y].x ==1:
+            Result_file.write('%s%s\n'%(y[0],y[1]))
+            print y
+    Result_file.close()
+    return
+
+printSaveResult()
