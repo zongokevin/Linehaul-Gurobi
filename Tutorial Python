@@ -1,0 +1,60 @@
+from gurobipy import *
+
+model = Model('Dispatch')
+#2 drivers,A,B
+#2 orders, 1,2
+
+DE= {} #DE['A',1]=1,
+
+Commandes = [1,2]
+Conducteurs = ['A','B']
+
+D={1:788,2:569}
+#Distance for each order
+
+H={1:7.45, 2:5.45}
+#Hour for each order
+
+R = {'A':25, 'B':35}
+# salaire conducteur
+
+CK = 1.5
+#cout par kilometre essence
+'''
+Fonction Objective
+Min: DE['A',1]*(D[1]*CK + H[1]*R['A']) + DE['A',2]*(D[2]*CK + H[2]*R['A']) +
+     DE['B',1]*(D[1]*CK + H[1]*R['B']) + DE['B',1]*(D[1]*CK + H[1]*R['B'])
+     
+Contraintes:
+    #ne pas envoyer 2 conducteur a la meme commande
+    DE['A',1] + DE['B',1] =< 1
+    DE['A',2] + DE['B',2] =< 1
+    
+    #chaque conducteur soit utiliser
+    DE['A',1] + DE['A',2] == 1
+    DE['B',1] + DE['B',2] == 1
+    
+  '''  
+  
+for i in Conducteurs:
+    for j in Commandes:
+        DE[i,j] = model.addVar(vtype = GRB.BINARY, obj= (D[j]*CK + H[j]*R[i]),name="DE[%s,%s]"%(i,j))
+        
+model.update()
+        
+#Contraintes
+model.addConstr( DE['A',1] + DE['B',1] <= 1,'Contraintes1')
+model.addConstr( DE['A',2] + DE['B',2] <= 1,'Contraintes2')
+
+model.addConstr( DE['A',1] + DE['A',2] == 1,'Contraintes3')
+model.addConstr( DE['B',1] + DE['B',2] == 1,'Contraintes4')
+
+model.update()
+model.ModelSense = 1
+model.optimize()
+
+def imprimerSolution():
+    for k in DE:
+        if DE[k].x>0:
+            print"Envoyer conducteur %s sur la commande %s"%(k[0],k[1])
+    return
