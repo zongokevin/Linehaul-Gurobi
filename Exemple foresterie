@@ -1,0 +1,58 @@
+from gurobipy import *
+import xlrd
+model = Model('Exemple foresterie')
+
+workbook = xlrd.open_workbook("C:/Users/Kevin/OneDrive/Projet_Jules/assigning_foresters.xls") #open the file
+
+sheet = workbook.sheet_by_name('exemple1')
+
+foresters=[]
+service = []
+#foresters = {'Peter':1, 'Paul':2, 'Mary': 3} #nom des employés
+
+for raw in range (1,4):
+    foresters.append((sheet.cell_value(raw,0)))
+    
+for col in range (1,5):
+    service.append((sheet.cell_value(0,col)))
+    
+#print foresters
+    
+Val = {}
+X ={}
+
+
+for raw in range(1,4):
+    for col in range(1,5):
+        Val[raw,col] = int(sheet.cell_value(raw,col))
+        X[raw,col] = model.addVar(vtype=GRB.BINARY, name='%s,%s'%(raw,col))
+model.update()
+
+expr_of_OBJ = LinExpr()
+#objective function
+
+for i in range(1, len(foresters)+1):
+    for j in range(1,len(service)+1):
+        expr_of_OBJ +=  Val[i,j]*X[i,j]
+        
+        
+model.update()
+model.setObjective(expr_of_OBJ, GRB.MAXIMIZE  )
+model.update()
+
+#Les contraintes
+# une tache par persone
+for i in range(1,len(foresters)+1):
+    model.addConstr( quicksum(X[i, task] for task in range(1,len(service)+1)) <= 1 )
+
+# une tache par persone suite
+for j in range(1, len(service)+1):
+    model.addConstr( quicksum(X[worker, j] for worker in range(1,len(foresters)+1)) <= 1 )
+    
+model.addConstr(X[3,2]==1)    
+
+model.update()   
+model.optimize() 
+for dec in X:
+    if X[dec].x > 0:
+        print '%s = %s, soit %s a la tache %s'%(dec,X[dec].x, foresters[dec[0]-1],service[dec[1]-1])
