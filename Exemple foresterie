@@ -1,5 +1,6 @@
-from gurobipy import *
+rom gurobipy import *
 import xlrd
+import pandas as pd
 model = Model('Exemple foresterie')
 
 workbook = xlrd.open_workbook("C:/Users/Kevin/OneDrive/Projet_Jules/assigning_foresters.xls") #open the file
@@ -49,10 +50,38 @@ for i in range(1,len(foresters)+1):
 for j in range(1, len(service)+1):
     model.addConstr( quicksum(X[worker, j] for worker in range(1,len(foresters)+1)) <= 1 )
     
-model.addConstr(X[3,2]==1)    
+#model.addConstr(X[3,2]==1)    
 
 model.update()   
 model.optimize() 
 for dec in X:
     if X[dec].x > 0:
         print '%s = %s, soit %s a la tache %s'%(dec,X[dec].x, foresters[dec[0]-1],service[dec[1]-1])
+        
+        
+def printExcel():
+    data = []
+    
+    if model.status == GRB.status.OPTIMAL:
+        for i in range(1, len(foresters)+1):
+            dict = {}
+            for j in range(1,len(service)+1):
+                if X[i,j].x > 0:# il a ete assigne a une tache
+                    dict["Foresters"] = foresters[i-1]
+                    dict["Chosen Tasks"] = service[j-1]
+                    dict["Note"] = Val[i,j]
+                    for t in  range(1,len(service)+1):
+                        dict[service[t-1]] = Val[i,t]
+                    
+                    data.append(dict)
+                    
+        results = pd.DataFrame(data)
+        results= results.sort(['Note'], ascending=[1])
+        
+        results = results[['Foresters','Chosen Tasks','Note','Timber sales',' Publics relations','Fire control','Inventory']]
+        results.to_excel('C:/Users/Kevin/OneDrive/Projet_Jules/solution.xls')
+        
+    else:
+        print "No solution"
+        
+printExcel()
